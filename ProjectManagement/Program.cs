@@ -129,11 +129,13 @@ using (var scope = app.Services.CreateScope())
 
 #region Middleware Pipeline
 
-if (app.Environment.IsDevelopment())
+app.UseSwagger();
+app.UseSwaggerUI(c => 
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "ProjectManagement API V1");
+    // Thiết lập Swagger hiển thị ngay ở đường dẫn gốc "/"
+    c.RoutePrefix = string.Empty;
+});
 
 app.UseHttpsRedirection();
 
